@@ -62,14 +62,14 @@ const FavoritesPage: React.FC = () => {
       <main className="favorites-page">
         <div className="container">
           <div className="page-header">
-            <h1>I miei preferiti</h1>
-            <p>{favorites.length} prodotti salvati</p>
+            <h1>{t('favorites')}</h1>
+            <p>{favorites.length} {t('saved_products')}</p>
           </div>
 
           {favorites.length === 0 ? (
             <div className="no-favorites">
-              <p>Non hai ancora prodotti tra i preferiti.</p>
-              <Link to="/" className="btn-primary">Scopri i prodotti</Link>
+              <p>{t('no_products')}</p>
+              <Link to="/" className="btn-primary">{t('discover_products')}</Link>
             </div>
           ) : (
             <div className="favorites-grid">
@@ -96,7 +96,7 @@ const FavoritesPage: React.FC = () => {
                         onClick={() => removeFavorite(product.id)}
                         className="btn-remove"
                       >
-                        ♥ Rimuovi
+                        ♥ {t('remove')}
                       </button>
                     </div>
                   </div>

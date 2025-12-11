@@ -17,10 +17,10 @@ const HeaderAdmin: React.FC = () => {
   };
 
   const menuItems = [
-    { label: 'Area personale', onClick: () => navigate('/admin/personal-area') },
-    { label: 'Le mie vendite', onClick: () => navigate('/admin/sales') },
-    { label: 'I miei articoli', onClick: () => navigate('/admin/products') },
-    { label: 'Carica un articolo', onClick: () => navigate('/admin/create-product') },
+    { label: t('personal_area'), onClick: () => navigate('/admin/personal-area') },
+    { label: t('sales_report'), onClick: () => navigate('/admin/sales') },
+    { label: t('my_products'), onClick: () => navigate('/admin/products') },
+    { label: t('add_product'), onClick: () => navigate('/admin/create-product') },
     { label: t('logout'), onClick: handleLogout },
   ];
 

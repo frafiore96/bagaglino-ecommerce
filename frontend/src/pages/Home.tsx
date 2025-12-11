@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import Header from '../components/Layout/Header';
 import { productsAPI, Product } from '../services/api';
 import { useLanguage } from '../context/LanguageContext';
+import Banner from '../components/Layout/Banner';
 
 const Home: React.FC = () => {
   const [featuredProducts, setFeaturedProducts] = useState<Product[]>([]);
@@ -78,12 +79,11 @@ const Home: React.FC = () => {
         <section className="hero">
           <div className="hero-content">
             <h1>BAGAGLINO</h1>
-            <p>Collezione Primavera/Estate 2025</p>
-            <Link to="/category/donna/all" className="cta-button">
-              Scopri la collezione
-            </Link>
           </div>
         </section>
+
+        {/* Banner Section */}
+        <Banner />
         {/* Photo Grid 2x3 with 4:5 aspect ratio */}
 <section className="photo-grid-section">
   <div className="photo-grid">
@@ -147,7 +147,7 @@ const Home: React.FC = () => {
         {/* Featured Products Slider */}
         {!loading && featuredProducts.length > 0 && (
           <section className="featured-section">
-            <h2>Prodotti in evidenza</h2>
+            <h2>{t('new_arrivals')}</h2>
             <div className="slider-container">
               <button onClick={prevSlide} className="slider-btn prev">‹</button>
               
@@ -197,6 +197,67 @@ const Home: React.FC = () => {
             </div>
           </section>
         )}
+         <section className="location-section">
+        <div className="location-container">
+          <h2 className="location-title">{t('where_we_are')}</h2>
+          <p className="location-subtitle">{t('visit_us')}</p>
+          
+          <div className="location-content">
+            <div className="location-info">
+              <div className="location-details">
+                <div className="location-detail">
+                  <div className="location-icon">📍</div>
+                  <div className="location-text">
+                    <h4>{t('address')}</h4>
+                    <p>{t('genzano_address')}</p>
+                  </div>
+                </div>
+                
+                <div className="location-detail">
+                  <div className="location-icon">🕒</div>
+                  <div className="location-text">
+                    <h4>{t('opening_hours')}</h4>
+                    <p>
+                      {t('monday_friday')}: {t('store_hours_1')}<br/>
+                      {t('saturday')}: {t('store_hours_2')}<br/>
+                      {t('sunday')}: {t('closed')}
+                    </p>
+                  </div>
+                </div>
+                
+                <div className="location-detail">
+                  <div className="location-icon">📞</div>
+                  <div className="location-text">
+                    <h4>{t('phone_number')}</h4>
+                    <p>06 939 7742</p>
+                  </div>
+                </div>
+                
+                <div className="location-detail">
+                  <div className="location-icon">✉️</div>
+                  <div className="location-text">
+                    <h4>{t('email_contact')}</h4>
+                    <p>info@bagaglino.com</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+            
+            <div className="location-map">
+              <iframe
+                src="https://maps.google.com/maps?q=Corso+Antonio+Gramsci+61-69+Genzano+di+Roma+00045+Italia&t=&z=16&ie=UTF8&iwloc=&output=embed"
+                width="100%"
+                height="450"
+                style={{ border: 0 }}
+                allowFullScreen={true}
+                loading="lazy"
+                referrerPolicy="no-referrer-when-downgrade"
+                title="Bagaglino Store - Corso A. Gramsci, Genzano di Roma"
+              ></iframe>
+            </div>
+          </div>
+        </div>
+      </section>
       </main>
     </div>
   );

@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import Header from '../components/Layout/Header';
 import { adminAPI, Product } from '../services/api';
+import { useLanguage } from '../context/LanguageContext';
 
 const AdminProductsPage: React.FC = () => {
   const [products, setProducts] = useState<Product[]>([]);
@@ -10,6 +11,7 @@ const AdminProductsPage: React.FC = () => {
   const [gender, setGender] = useState('');
   const [category, setCategory] = useState('');
   const navigate = useNavigate();
+  const { t } = useLanguage();
 
   const loadProducts = async () => {
     try {
@@ -55,9 +57,9 @@ const AdminProductsPage: React.FC = () => {
       <Header />
       <div className="admin-container">
         <div className="page-header">
-          <h1>I miei articoli</h1>
+          <h1>{t('my_products')}</h1>
           <Link to="/admin/create-product" className="btn-primary">
-            + Aggiungi Prodotto
+            + {t('upload_new_product')}
           </Link>
         </div>
 
@@ -65,7 +67,7 @@ const AdminProductsPage: React.FC = () => {
         <div className="filters-section">
           <input
             type="text"
-            placeholder="Cerca prodotto..."
+            placeholder={t('search_products')}
             value={search}
             onChange={(e) => setSearch(e.target.value)}
             className="search-input"
@@ -75,42 +77,41 @@ const AdminProductsPage: React.FC = () => {
             onChange={(e) => setGender(e.target.value)}
             className="filter-select"
           >
-            <option value="">Tutti i generi</option>
-            <option value="uomo">Uomo</option>
-            <option value="donna">Donna</option>
-            <option value="unisex">Unisex</option>
+            <option value="">{t('all_genders')}</option>
+            <option value="uomo">{t('uomo')}</option>
+            <option value="donna">{t('donna')}</option>
+            <option value="unisex">{t('unisex')}</option>
           </select>
           <select 
             value={category} 
             onChange={(e) => setCategory(e.target.value)}
             className="filter-select"
           >
-            <option value="">Tutte le categorie</option>
-            <option value="t-shirt">T-shirt</option>
-            <option value="maglioni">Maglioni</option>
-            <option value="giacche">Giacche</option>
-            <option value="pantaloni">Pantaloni</option>
-            <option value="scarpe">Scarpe</option>
-            <option value="camicie">Camicie</option>
-            <option value="felpe">Felpe</option>
-            <option value="giubbotti">Giubbotti</option>
-            <option value="accessori">Accessori</option>
+            <option value="">{t('all_categories')}</option>
+            <option value="t-shirt">{t('giubbotti')}</option>
+            <option value="maglioni">{t('maglioni')}</option>
+            <option value="giacche">{t('giacche')}</option>
+            <option value="pantaloni">{t('pantaloni')}</option>
+            <option value="scarpe">{t('scarpe')}</option>
+            <option value="camicie">{t('camicie')}</option>
+            <option value="felpe">{t('felpe')}</option>
+            <option value="accessori">{t('accessori')}</option>
           </select>
         </div>
 
         {/* Products Table */}
         {loading ? (
-          <div className="loading">Caricamento prodotti...</div>
+          <div className="loading">{t('loading')}</div>
         ) : (
           <div className="products-table">
             <div className="table-header">
-              <div>Codice</div>
-              <div>Nome</div>
-              <div>Genere</div>
-              <div>Categoria</div>
-              <div>Prezzo</div>
-              <div>Stock</div>
-              <div>Azioni</div>
+              <div>{t('code')}</div>
+              <div>{t('name')}</div>
+              <div>{t('gender')}</div>
+              <div>{t('category')}</div>
+              <div>{t('price')}</div>
+              <div>{t('stock')}</div>
+              <div>{t('actions')}</div>
             </div>
             {filteredProducts.map(product => (
               <div key={product.id} className="table-row">
@@ -125,20 +126,20 @@ const AdminProductsPage: React.FC = () => {
                     onClick={() => navigate(`/admin/edit-product/${product.id}`)}
                     className="btn-edit"
                   >
-                    Modifica
+                    {t('modify')}
                   </button>
                   <button 
                     onClick={() => archiveProduct(product.id, product.name)}
                     className="btn-archive"
                   >
-                    Archivia
+                    {t('archive')}
                   </button>
                 </div>
               </div>
             ))}
             {filteredProducts.length === 0 && (
               <div className="no-products">
-                Nessun prodotto trovato
+              {t('no_results')}
               </div>
             )}
           </div>

@@ -96,14 +96,14 @@ const CartPage: React.FC = () => {
       <main className="cart-page">
         <div className="container">
           <div className="page-header">
-            <h1>Il mio carrello</h1>
-            <p>{getTotalItems()} articoli</p>
+            <h1>{t('my_cart')}</h1>
+            <p>{getTotalItems()} {t('products')}</p>
           </div>
 
           {cartItems.length === 0 ? (
             <div className="empty-cart">
-              <p>Il tuo carrello è vuoto.</p>
-              <Link to="/" className="btn-primary">Continua lo shopping</Link>
+              <p>{t('cart_empty')}</p>
+              <Link to="/" className="btn-primary">{t('continue_shopping')}</Link>
             </div>
           ) : (
             <div className="cart-content">
@@ -121,7 +121,7 @@ const CartPage: React.FC = () => {
                       <Link to={`/product/${item.product_id}`}>
                         <h3>{item.name}</h3>
                       </Link>
-                      <p className="item-code">Codice: {item.product_code}</p>
+                      <p className="item-code">{t('code')}: {item.product_code}</p>
                       <p className="item-price">€{(Number(item.price) || 0).toFixed(2)}</p>
                     </div>
                     
@@ -158,24 +158,24 @@ const CartPage: React.FC = () => {
               
               <div className="cart-summary">
                 <div className="summary-card">
-                  <h3>Riepilogo ordine</h3>
+                  <h3>{t('order_summary')}</h3>
                   <div className="summary-line">
-                    <span>Articoli ({getTotalItems()})</span>
+                    <span>{t('products')} ({getTotalItems()})</span>
                     <span>€{getTotalAmount().toFixed(2)}</span>
                   </div>
                   <div className="summary-line">
-                    <span>Spedizione</span>
-                    <span>Gratuita</span>
+                    <span>{t('shipping')}</span>
+                    <span>{t('free')}</span>
                   </div>
                   <div className="summary-total">
-                    <span>Totale</span>
+                    <span>{t('total')} </span>
                     <span>€{getTotalAmount().toFixed(2)}</span>
                   </div>
                   <button 
                     onClick={() => navigate('/user/checkout')}
                     className="checkout-btn"
                   >
-                    Procedi all'acquisto
+                    {t('place_order')}
                   </button>
                 </div>
               </div>

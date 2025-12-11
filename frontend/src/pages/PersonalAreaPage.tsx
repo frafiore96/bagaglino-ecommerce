@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import Header from '../components/Layout/Header';
 import { userAPI, User } from '../services/api';
 import { useAuth } from '../context/AuthContext';
+import { useLanguage } from '../context/LanguageContext';
 
 const PersonalAreaPage: React.FC = () => {
   const [userData, setUserData] = useState<User | null>(null);
@@ -19,6 +20,7 @@ const PersonalAreaPage: React.FC = () => {
   const [isEditing, setIsEditing] = useState(false);
 
   const { user } = useAuth();
+  const { t } = useLanguage();
 
   useEffect(() => {
     const loadProfile = async () => {
@@ -99,8 +101,8 @@ const PersonalAreaPage: React.FC = () => {
       <main className="personal-area-page">
         <div className="container">
           <div className="page-header">
-            <h1>Area personale</h1>
-            <p>Gestisci i tuoi dati personali</p>
+            <h1>{t('personal_area')}</h1>
+            <p>{t('account_settings')}</p>
           </div>
 
           <div className="profile-content">
@@ -119,7 +121,7 @@ const PersonalAreaPage: React.FC = () => {
                   <h2>{userData?.name} {userData?.surname}</h2>
                   <p>{userData?.email}</p>
                   <span className="role-badge">
-                    {user?.role === 'admin' ? 'Amministratore' : 'Utente'}
+                    {user?.role === 'admin' ? 'Admin' : 'User'}
                   </span>
                 </div>
                 <div className="profile-actions">
@@ -128,14 +130,14 @@ const PersonalAreaPage: React.FC = () => {
                       onClick={() => setIsEditing(true)}
                       className="btn-primary"
                     >
-                      Modifica profilo
+                      {t('edit_profile')}
                     </button>
                   ) : (
                     <button 
                       onClick={handleCancel}
                       className="btn-secondary"
                     >
-                      Annulla
+                      {t('cancel')}
                     </button>
                   )}
                 </div>
@@ -143,10 +145,10 @@ const PersonalAreaPage: React.FC = () => {
 
               <form onSubmit={handleSubmit} className="profile-form">
                 <div className="form-section">
-                  <h3>Informazioni personali</h3>
+                  <h3>{t('personal_info')}</h3>
                   <div className="form-row">
                     <div className="form-group">
-                      <label htmlFor="name">Nome</label>
+                      <label htmlFor="name">{t('name')}</label>
                       <input
                         id="name"
                         name="name"
@@ -158,7 +160,7 @@ const PersonalAreaPage: React.FC = () => {
                       />
                     </div>
                     <div className="form-group">
-                      <label htmlFor="surname">Cognome</label>
+                      <label htmlFor="surname">{t('surname')}</label>
                       <input
                         id="surname"
                         name="surname"
@@ -172,7 +174,7 @@ const PersonalAreaPage: React.FC = () => {
                   </div>
                   
                   <div className="form-group">
-                    <label htmlFor="email">Email</label>
+                    <label htmlFor="email">{t('email')}</label>
                     <input
                       id="email"
                       name="email"
@@ -184,7 +186,7 @@ const PersonalAreaPage: React.FC = () => {
                   </div>
                   
                   <div className="form-group">
-                    <label htmlFor="phone">Telefono</label>
+                    <label htmlFor="phone">{t('phone')}</label>
                     <input
                       id="phone"
                       name="phone"
@@ -211,9 +213,9 @@ const PersonalAreaPage: React.FC = () => {
                 </div>
 
                 <div className="form-section">
-                  <h3>Indirizzi</h3>
+                  <h3>{t('address')}</h3>
                   <div className="form-group">
-                    <label htmlFor="billing_address">Indirizzo di fatturazione</label>
+                    <label htmlFor="billing_address">{t('billing_address')}</label>
                     <textarea
                       id="billing_address"
                       name="billing_address"
@@ -221,12 +223,11 @@ const PersonalAreaPage: React.FC = () => {
                       onChange={handleChange}
                       disabled={!isEditing}
                       rows={3}
-                      placeholder="Via, numero civico, città, CAP"
                     />
                   </div>
                   
                   <div className="form-group">
-                    <label htmlFor="shipping_address">Indirizzo di spedizione</label>
+                    <label htmlFor="shipping_address">{t('shipping_address')}</label>
                     <textarea
                       id="shipping_address"
                       name="shipping_address"
@@ -234,7 +235,6 @@ const PersonalAreaPage: React.FC = () => {
                       onChange={handleChange}
                       disabled={!isEditing}
                       rows={3}
-                      placeholder="Via, numero civico, città, CAP"
                     />
                   </div>
                 </div>
@@ -246,7 +246,7 @@ const PersonalAreaPage: React.FC = () => {
                       className="btn-primary"
                       disabled={saving}
                     >
-                      {saving ? 'Salvando...' : 'Salva modifiche'}
+                      {saving ? 'Salvando...' : t('save')}
                     </button>
                   </div>
                 )}

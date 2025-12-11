@@ -24,7 +24,6 @@ const LoginPage: React.FC = () => {
     const result = await login(email, password);
     
     if (result.success) {
-      // Reindirizza admin alla dashboard, utenti alla home o pagina precedente
       const redirectTo = result.user?.role === 'admin' ? '/admin/dashboard' : from;
       navigate(redirectTo, { replace: true });
     } else {
@@ -54,7 +53,7 @@ const LoginPage: React.FC = () => {
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               required
-              placeholder="email@esempio.com"
+              placeholder="email@example.com"
             />
           </div>
           
@@ -75,12 +74,12 @@ const LoginPage: React.FC = () => {
             className="auth-button"
             disabled={loading}
           >
-            {loading ? 'Caricamento...' : t('login')}
+            {loading ? t('loading') : t('login')}
           </button>
           
           <div className="auth-links">
-            <span>Non hai un account? </span>
-            <Link to="/register">Registrati</Link>
+            <span>{t('dont_have_account')} </span>
+            <Link to="/register">{t('register_here')}</Link>
           </div>
         </form>
 

@@ -5,6 +5,7 @@ import { CartProvider } from './context/CartContext';
 import { LanguageProvider } from './context/LanguageContext';
 import AppRoutes from './routes/AppRoutes';
 import WelcomePopup from './components/Common/WelcomePopup';
+import Footer from './components/Layout/Footer';
 import './App.css';
 
 const AppContent: React.FC = () => {
@@ -12,7 +13,10 @@ const AppContent: React.FC = () => {
 
   return (
     <div className="App">
-      <AppRoutes />
+      <main className="main-content">
+        <AppRoutes />
+      </main>
+      <Footer />
       {showWelcomePopup && user && (
         <WelcomePopup 
           userName={user.name} 

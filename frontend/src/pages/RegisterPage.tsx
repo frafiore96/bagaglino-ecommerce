@@ -78,7 +78,6 @@ const RegisterPage: React.FC = () => {
                 value={formData.name}
                 onChange={handleChange}
                 required
-                placeholder="Nome"
               />
             </div>
             
@@ -91,7 +90,6 @@ const RegisterPage: React.FC = () => {
                 value={formData.surname}
                 onChange={handleChange}
                 required
-                placeholder="Cognome"
               />
             </div>
           </div>
@@ -105,12 +103,12 @@ const RegisterPage: React.FC = () => {
               value={formData.email}
               onChange={handleChange}
               required
-              placeholder="email@esempio.com"
+              placeholder="email@example.com"
             />
           </div>
           
           <div className="form-group">
-            <label htmlFor="phone">{t('phone')} (opzionale)</label>
+            <label htmlFor="phone">{t('phone')}</label>
             <input
               id="phone"
               name="phone"
@@ -130,12 +128,12 @@ const RegisterPage: React.FC = () => {
               value={formData.password}
               onChange={handleChange}
               required
-              placeholder="Minimo 6 caratteri"
+              placeholder={t('password_size_requirement')}
             />
           </div>
           
           <div className="form-group">
-            <label htmlFor="confirmPassword">Conferma password</label>
+            <label htmlFor="confirmPassword">{t('confirm_password')}</label>
             <input
               id="confirmPassword"
               name="confirmPassword"
@@ -143,7 +141,6 @@ const RegisterPage: React.FC = () => {
               value={formData.confirmPassword}
               onChange={handleChange}
               required
-              placeholder="Ripeti la password"
             />
           </div>
           
@@ -152,12 +149,12 @@ const RegisterPage: React.FC = () => {
             className="auth-button"
             disabled={loading}
           >
-            {loading ? 'Caricamento...' : t('register')}
+            {loading ? t('loading') : t('register')}
           </button>
           
           <div className="auth-links">
-            <span>Hai già un account? </span>
-            <Link to="/login">Accedi</Link>
+            <span>{t('already_have_account')} </span>
+            <Link to="/login">{t('login')}</Link>
           </div>
         </form>
       </div>

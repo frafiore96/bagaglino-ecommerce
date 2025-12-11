@@ -41,15 +41,15 @@ const CategoryPage: React.FC = () => {
         <div className="container">
           <div className="page-header">
             <h1>{getTitle()}</h1>
-            <p>{products.length} prodotti trovati</p>
+            <p>{products.length} {t('found_products')}</p>
           </div>
 
           {loading ? (
-            <div className="loading">Caricamento prodotti...</div>
+            <div className="loading">{t('loading')}</div>
           ) : products.length === 0 ? (
             <div className="no-products">
-              <p>Nessun prodotto trovato in questa categoria.</p>
-              <Link to="/" className="btn-primary">Torna alla home</Link>
+              <p>{t('no_results')}</p>
+              <Link to="/" className="btn-primary">{t('home')}</Link>
             </div>
           ) : (
             <div className="products-grid">
@@ -65,7 +65,7 @@ const CategoryPage: React.FC = () => {
                       alt={product.name}
                     />
                     {product.stock <= 5 && product.stock > 0 && (
-                      <div className="stock-badge">Ultimi {product.stock}</div>
+                      <div className="stock-badge">Last Call {product.stock}</div>
                     )}
                   </div>
                   <div className="product-info">

@@ -75,7 +75,7 @@ const SearchBar: React.FC = () => {
           type="text"
           value={query}
           onChange={handleInputChange}
-          placeholder="Cerca prodotti..."
+          placeholder={t('search_products')}
           className="search-input"
         />
         <button type="submit" className="search-button">
@@ -113,7 +113,7 @@ const SearchBar: React.FC = () => {
               </Link>
             ))
           ) : query.length > 2 ? (
-            <div className="suggestion-item no-results">Nessun risultato trovato</div>
+            <div className="suggestion-item no-results">{t('no_results')}</div>
           ) : null}
         </div>
       )}

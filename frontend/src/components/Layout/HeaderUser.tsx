@@ -53,7 +53,7 @@ const HeaderUser: React.FC = () => {
 
   const menuItems = [
     { label: t('profile'), onClick: () => navigate('/user/personal-area') },
-    { label: 'I miei acquisti', onClick: () => navigate('/user/purchases') },
+    { label: t('my_orders'), onClick: () => navigate('/user/purchases') },
     { label: t('favorites'), onClick: () => navigate('/user/favorites') },
     { label: t('cart'), onClick: () => navigate('/user/cart') },
     { label: t('logout'), onClick: handleLogout },

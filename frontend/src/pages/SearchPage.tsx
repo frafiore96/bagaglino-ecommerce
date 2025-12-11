@@ -2,12 +2,14 @@ import React, { useState, useEffect } from 'react';
 import { useSearchParams, Link } from 'react-router-dom';
 import Header from '../components/Layout/Header';
 import { productsAPI, Product } from '../services/api';
+import { useLanguage } from '../context/LanguageContext';
 
 const SearchPage: React.FC = () => {
   const [searchParams] = useSearchParams();
   const [products, setProducts] = useState<Product[]>([]);
   const [loading, setLoading] = useState(true);
   const query = searchParams.get('q') || '';
+  const { t } = useLanguage();
 
   useEffect(() => {
     const searchProducts = async () => {
@@ -33,8 +35,8 @@ const SearchPage: React.FC = () => {
       <Header />
       <main className="search-page">
         <div className="container">
-          <h1>Risultati per "{query}"</h1>
-          <p>{products.length} prodotti trovati</p>
+          <h1>{t('results_for')} "{query}"</h1>
+          <p>{products.length} {t('found_products')}</p>
           
           {loading ? (
             <div className="loading">Ricerca in corso...</div>

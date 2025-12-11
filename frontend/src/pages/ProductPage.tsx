@@ -186,7 +186,7 @@ const ProductPage: React.FC = () => {
               </div>
               
               <div className="size-selector">
-                <label>Taglia:</label>
+                <label>{t('size')}</label>
                 <div className="sizes">
                   {sizes.map(size => (
                     <button
@@ -205,8 +205,8 @@ const ProductPage: React.FC = () => {
                 {selectedSize ? (
                   <span className={sizeStock[selectedSize] > 0 ? 'in-stock' : 'out-of-stock'}>
                     {sizeStock[selectedSize] > 0 
-                      ? `${sizeStock[selectedSize]} disponibili in taglia ${selectedSize}` 
-                      : 'Non disponibile in questa taglia'
+                      ? `${sizeStock[selectedSize]} ${t('in_stock')}` 
+                      : t('out_of_stock')
                     }
                   </span>
                 ) : (
@@ -223,7 +223,10 @@ const ProductPage: React.FC = () => {
                     disabled={addingToFavorites}
                     className="btn-secondary"
                   >
-                    {addingToFavorites ? 'Aggiungendo...' : '♥ Aggiungi ai preferiti'}
+                    {addingToFavorites
+                      ? t('adding_to_favorites')
+                      : `♥ ${t('add_to_favorites')}`
+                    }
                   </button>
                   
                   <button 
@@ -231,7 +234,10 @@ const ProductPage: React.FC = () => {
                     disabled={addingToCart || !selectedSize || (!!selectedSize && sizeStock[selectedSize] === 0)}
                     className="btn-primary"
                   >
-                    {addingToCart ? 'Aggiungendo...' : 'Aggiungi al carrello'}
+                    {addingToCart
+                      ? t('adding_to_favorites')
+                      : `♥ ${t('add_to_cart')}`
+                    }
                   </button>
                   
                   <button 
@@ -239,7 +245,7 @@ const ProductPage: React.FC = () => {
                     disabled={!selectedSize || (!!selectedSize && sizeStock[selectedSize] === 0)}
                     className="btn-buy-now"
                   >
-                    Acquista ora
+                    {t('buy_now')}
                   </button>
                 </div>
               )}

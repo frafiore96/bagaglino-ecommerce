@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import Header from '../components/Layout/Header';
 import { adminAPI } from '../services/api';
+import { useLanguage } from '../context/LanguageContext';
 
 interface Sale {
   id: number;
@@ -20,7 +21,7 @@ const AdminSalesPage: React.FC = () => {
   const [loading, setLoading] = useState(true);
   const [page, setPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
-
+  const { t } = useLanguage();
   const loadSales = async () => {
     try {
       setLoading(true);
@@ -52,7 +53,7 @@ const AdminSalesPage: React.FC = () => {
     return (
       <div>
         <Header />
-        <div className="admin-container">Caricamento vendite...</div>
+        <div className="admin-container">{t('loading')}</div>
       </div>
     );
   }
@@ -62,27 +63,27 @@ const AdminSalesPage: React.FC = () => {
       <Header />
       <div className="admin-container">
         <div className="page-header">
-          <h1>Le mie vendite</h1>
+          <h1>{t('sales')}</h1>
           <div className="sales-summary">
-            Totale vendite: {sales.length}
+            {t('total_sales')}: {sales.length}
           </div>
         </div>
 
         {sales.length === 0 ? (
           <div className="no-sales">
-            <p>Nessuna vendita ancora effettuata.</p>
+            <p>{t('no_sales')}</p>
           </div>
         ) : (
           <div className="sales-table">
             <div className="table-header">
-              <div>Ordine</div>
-              <div>Data</div>
-              <div>Cliente</div>
-              <div>Email</div>
-              <div>Telefono</div>
-              <div>Prodotti</div>
-              <div>Totale</div>
-              <div>Azioni</div>
+              <div>{t('order')}</div>
+              <div>{t('date')}</div>
+              <div>{t('customer')}</div>
+              <div>{t('email')}</div>
+              <div>{t('phone')}</div>
+              <div>{t('products')}</div>
+              <div>{t('total')}</div>
+              <div>{t('actions')}</div>
             </div>
             
             {sales.map(sale => (
@@ -99,7 +100,7 @@ const AdminSalesPage: React.FC = () => {
                     onClick={() => alert(`Indirizzo fatturazione: ${sale.billing_address}\n\nIndirizzo spedizione: ${sale.shipping_address}`)}
                     className="btn-info"
                   >
-                    Dettagli
+                    {t('details')}
                   </button>
                 </div>
               </div>

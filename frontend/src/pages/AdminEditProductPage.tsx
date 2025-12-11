@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import Header from '../components/Layout/Header';
 import { adminAPI, productsAPI } from '../services/api';
+import { useLanguage } from '../context/LanguageContext';
 
 const AdminEditProductPage: React.FC = () => {
   const { id } = useParams<{ id: string }>();
@@ -23,6 +24,7 @@ const AdminEditProductPage: React.FC = () => {
   const [error, setError] = useState('');
   
   const navigate = useNavigate();
+  const { t } = useLanguage();
 
   useEffect(() => {
     const loadProduct = async () => {
@@ -183,7 +185,7 @@ const AdminEditProductPage: React.FC = () => {
     return (
       <div>
         <Header />
-        <div className="loading">Caricamento prodotto...</div>
+        <div className="loading">{t('loading')}</div>
       </div>
     );
   }
@@ -193,7 +195,7 @@ const AdminEditProductPage: React.FC = () => {
       <Header />
       <div className="admin-container">
         <div className="page-header">
-          <h1>Modifica prodotto</h1>
+          <h1>{t('edit_product')}</h1>
         </div>
 
         <form onSubmit={handleSubmit} className="product-form">
@@ -203,7 +205,7 @@ const AdminEditProductPage: React.FC = () => {
 
           <div className="form-grid">
             <div className="form-group">
-              <label htmlFor="name">Nome Prodotto *</label>
+              <label htmlFor="name">{t('product_name')} *</label>
               <input
                 id="name"
                 name="name"
@@ -215,7 +217,7 @@ const AdminEditProductPage: React.FC = () => {
             </div>
 
             <div className="form-group">
-              <label htmlFor="price">Prezzo (€) *</label>
+              <label htmlFor="price">{t('price')} (€) *</label>
               <input
                 id="price"
                 name="price"
@@ -229,7 +231,7 @@ const AdminEditProductPage: React.FC = () => {
             </div>
 
             <div className="form-group">
-              <label htmlFor="gender">Genere *</label>
+              <label htmlFor="gender">{t('gender')} *</label>
               <select
                 id="gender"
                 name="gender"
@@ -237,14 +239,14 @@ const AdminEditProductPage: React.FC = () => {
                 onChange={handleChange}
                 required
               >
-                <option value="uomo">Uomo</option>
-                <option value="donna">Donna</option>
-                <option value="unisex">Unisex</option>
+                <option value="uomo">{t('uomo')}</option>
+                <option value="donna">{t('donna')}</option>
+                <option value="unisex">{t('unisex')}</option>
               </select>
             </div>
 
             <div className="form-group">
-              <label htmlFor="category">Categoria *</label>
+              <label htmlFor="category">{t('category')} *</label>
               <select
                 id="category"
                 name="category"
@@ -252,25 +254,25 @@ const AdminEditProductPage: React.FC = () => {
                 onChange={handleChange}
                 required
               >
-                <option value="t-shirt">T-shirt</option>
-                <option value="maglioni">Maglioni</option>
-                <option value="giacche">Giacche</option>
-                <option value="pantaloni">Pantaloni</option>
-                <option value="scarpe">Scarpe</option>
-                <option value="camicie">Camicie</option>
-                <option value="felpe">Felpe</option>
-                <option value="giubbotti">Giubbotti</option>
-                <option value="accessori">Accessori</option>
+                <option value="t-shirt">{t('t-shirt')}</option>
+                <option value="maglioni">{t('maglioni')}</option>
+                <option value="giacche">{t('giacche')}</option>
+                <option value="pantaloni">{t('pantaloni')}</option>
+                <option value="scarpe">{t('scarpe')}</option>
+                <option value="camicie">{t('camicie')}</option>
+                <option value="felpe">{t('felpe')}</option>
+                <option value="giubbotti">{t('giubbotti')}</option>
+                <option value="accessori">{t('accessori')}</option>
               </select>
             </div>
 
             <div className="form-group">
-              <label>Immagine Prodotto</label>
+              <label>{t('product_image')} </label>
               {imagePreview && (
                 <div className="image-preview">
                   <img src={imagePreview} alt="Preview" />
                   <button type="button" onClick={removeImage} className="remove-image-btn">
-                    Rimuovi immagine
+                  {t('remove')} 
                   </button>
                 </div>
               )}
@@ -281,22 +283,10 @@ const AdminEditProductPage: React.FC = () => {
               />
             </div>
 
-            <div className="form-group">
-              <label htmlFor="image_url">Oppure URL Immagine</label>
-              <input
-                id="image_url"
-                name="image_url"
-                type="url"
-                value={formData.image_url}
-                onChange={handleChange}
-                placeholder="https://esempio.com/immagine.jpg"
-                disabled={!!imageFile}
-              />
-            </div>
           </div>
 
           <div className="form-group full-width">
-            <label>Stock per taglia *</label>
+            <label>Stock *</label>
             <div className="size-grid">
               {['XS', 'S', 'M', 'L', 'XL', 'XXL'].map(size => (
                 <div key={size} className="size-input">
@@ -310,11 +300,11 @@ const AdminEditProductPage: React.FC = () => {
                 </div>
               ))}
             </div>
-            <p className="stock-total">Totale: {getTotalStock()} pezzi</p>
+            <p className="stock-total">{t('total')}: {getTotalStock()} {t('products')}</p>
           </div>
 
           <div className="form-group full-width">
-            <label htmlFor="description">Descrizione</label>
+            <label htmlFor="description">{t('description')}</label>
             <textarea
               id="description"
               name="description"
@@ -330,14 +320,14 @@ const AdminEditProductPage: React.FC = () => {
               onClick={() => navigate('/admin/products')}
               className="btn-secondary"
             >
-              Annulla
+              {t('cancel')}
             </button>
             <button 
               type="submit" 
               className="btn-primary"
               disabled={saving}
             >
-              {saving ? 'Salvando...' : 'Salva modifiche'}
+              {saving ? 'Salvando...' : t('save') }
             </button>
           </div>
         </form>
