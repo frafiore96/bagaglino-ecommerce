@@ -178,6 +178,7 @@ const translations = {
     'english': 'Inglese',
     'modify': 'Modifica',
     'archive': 'Archivia',
+    'promo_banner_text': 'PROMO! SALDI FINO AL 50% NELLO STORE FISICO',
 
     'footer_description': 'Il tuo negozio di abbigliamento di qualità. Scopri le nostre collezioni per uomo, donna e unisex.',
     'quick_links': 'Link Rapidi',
@@ -366,6 +367,7 @@ const translations = {
     'order': 'Order',
     'modify': 'Modify',
     'archive': 'Archive',
+    'promo_banner_text': 'PROMO! UP TO 50% OFF IN THE PHYSICAL STORE',
 
     'footer_description': 'Your fashion store for quality clothing. Discover our collections for men, women and unisex.',
     'quick_links': 'Quick Links',
