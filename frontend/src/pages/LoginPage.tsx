@@ -27,7 +27,7 @@ const LoginPage: React.FC = () => {
       const redirectTo = result.user?.role === 'admin' ? '/admin/dashboard' : from;
       navigate(redirectTo, { replace: true });
     } else {
-      setError(result.message || 'Errore durante il login');
+      setError(result.message || 'Login error');
     }
     
     setLoading(false);

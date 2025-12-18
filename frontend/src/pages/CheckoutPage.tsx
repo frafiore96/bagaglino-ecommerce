@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import Header from '../components/Layout/Header';
 import { userAPI } from '../services/api';
 import { useCart } from '../context/CartContext';
+import { useLanguage } from '../context/LanguageContext';
 
 interface CartItem {
   id: number;
@@ -29,6 +30,7 @@ const CheckoutPage: React.FC = () => {
 
   const { clearCart } = useCart();
   const navigate = useNavigate();
+  const { t } = useLanguage();
 
   useEffect(() => {
     const loadCart = async () => {
@@ -98,7 +100,7 @@ const CheckoutPage: React.FC = () => {
       navigate('/user/purchases');
     } catch (error: any) {
       console.error('Checkout error:', error);
-      alert(error.response?.data?.message || 'Errore durante l\'acquisto');
+      alert(error.response?.data?.message || 'Error during purchase');
     } finally {
       setProcessing(false);
     }
@@ -108,7 +110,7 @@ const CheckoutPage: React.FC = () => {
     return (
       <div>
         <Header />
-        <div className="loading">Caricamento...</div>
+        <div className="loading">{t('loading')}</div>
       </div>
     );
   }
@@ -120,17 +122,17 @@ const CheckoutPage: React.FC = () => {
       <main className="checkout-page">
         <div className="container">
           <div className="page-header">
-            <h1>Completa l'acquisto</h1>
+            <h1>{t('complete_order')}</h1>
           </div>
 
           <div className="checkout-content">
             <div className="checkout-form">
               <form onSubmit={handleSubmit}>
                 <div className="form-section">
-                  <h3>Dati personali</h3>
+                  <h3>{t('personal_info')}</h3>
                   <div className="form-row">
                     <div className="form-group">
-                      <label htmlFor="customer_name">Nome *</label>
+                      <label htmlFor="customer_name">{t('name')} *</label>
                       <input
                         id="customer_name"
                         name="customer_name"
@@ -141,7 +143,7 @@ const CheckoutPage: React.FC = () => {
                       />
                     </div>
                     <div className="form-group">
-                      <label htmlFor="customer_surname">Cognome *</label>
+                      <label htmlFor="customer_surname">{t('surname')} *</label>
                       <input
                         id="customer_surname"
                         name="customer_surname"
@@ -154,7 +156,7 @@ const CheckoutPage: React.FC = () => {
                   </div>
                   
                   <div className="form-group">
-                    <label htmlFor="customer_email">Email *</label>
+                    <label htmlFor="customer_email">{t('email')} *</label>
                     <input
                       id="customer_email"
                       name="customer_email"
@@ -166,7 +168,7 @@ const CheckoutPage: React.FC = () => {
                   </div>
                   
                   <div className="form-group">
-                    <label htmlFor="customer_phone">Telefono *</label>
+                    <label htmlFor="customer_phone">{t('phone')} *</label>
                     <input
                       id="customer_phone"
                       name="customer_phone"
@@ -179,23 +181,21 @@ const CheckoutPage: React.FC = () => {
                 </div>
 
                 <div className="form-section">
-                  <h3>Indirizzo di fatturazione</h3>
+                  <h3>{t('billing_address')}</h3>
                   <div className="form-group">
-                    <label htmlFor="billing_address">Indirizzo completo *</label>
+                    <label htmlFor="billing_address">{t('address')} *</label>
                     <textarea
                       id="billing_address"
                       name="billing_address"
                       value={formData.billing_address}
                       onChange={handleChange}
                       rows={3}
-                      required
-                      placeholder="Via, numero civico, città, CAP"
-                    />
+                      required                    />
                   </div>
                 </div>
 
                 <div className="form-section">
-                  <h3>Indirizzo di spedizione</h3>
+                  <h3>{t('shipping_address')}</h3>
                   <div className="form-group checkbox-group">
                     <label>
                       <input
@@ -204,13 +204,13 @@ const CheckoutPage: React.FC = () => {
                         checked={formData.sameAddress}
                         onChange={handleChange}
                       />
-                      Uguale all'indirizzo di fatturazione
+                      {t('same_address')}
                     </label>
                   </div>
                   
                   {!formData.sameAddress && (
                     <div className="form-group">
-                      <label htmlFor="shipping_address">Indirizzo di spedizione *</label>
+                      <label htmlFor="shipping_address">{t('shipping_address')} *</label>
                       <textarea
                         id="shipping_address"
                         name="shipping_address"
@@ -218,16 +218,15 @@ const CheckoutPage: React.FC = () => {
                         onChange={handleChange}
                         rows={3}
                         required={!formData.sameAddress}
-                        placeholder="Via, numero civico, città, CAP"
                       />
                     </div>
                   )}
                 </div>
 
                 <div className="form-section">
-                  <h3>Pagamento</h3>
+                  <h3>{t('checkout')}</h3>
                   <div className="payment-info">
-                    <p>💳 Questo è un ordine di test - nessun pagamento reale verrà elaborato</p>
+                    <p>{t('test_order_info')}</p>
                   </div>
                 </div>
 
@@ -236,13 +235,15 @@ const CheckoutPage: React.FC = () => {
                   className="complete-order-btn"
                   disabled={processing}
                 >
-                  {processing ? 'Elaborando...' : `Completa ordine - €${getTotalAmount().toFixed(2)}`}
-                </button>
+                {processing
+                  ? t('loading')
+                  : `${t('complete_order')} - €${getTotalAmount().toFixed(2)}`
+                }                </button>
               </form>
             </div>
 
             <div className="order-summary">
-              <h3>Riepilogo ordine</h3>
+              <h3>{t('order_summary')}</h3>
               <div className="summary-items">
                 {cartItems.map((item) => (
                   <div key={item.id} className="summary-item">
@@ -252,7 +253,7 @@ const CheckoutPage: React.FC = () => {
                     />
                     <div className="item-info">
                       <p>{item.name}</p>
-                      <p>Quantità: {item.quantity}</p>
+                      <p>{t('quantity')}: {item.quantity}</p>
                     </div>
                     <div className="item-price">
                       €{(Number(item.price) * item.quantity).toFixed(2)}
@@ -261,7 +262,7 @@ const CheckoutPage: React.FC = () => {
                 ))}
               </div>
               <div className="summary-total">
-                <p>Totale: €{getTotalAmount().toFixed(2)}</p>
+                <p>{t('total')}: €{getTotalAmount().toFixed(2)}</p>
               </div>
             </div>
           </div>

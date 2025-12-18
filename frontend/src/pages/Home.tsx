@@ -58,11 +58,21 @@ const Home: React.FC = () => {
   const totalSlides = Math.ceil(featuredProducts.length / productsPerSlide);
 
   const nextSlide = () => {
-    setCurrentSlide((prev) => (prev + 1) % totalSlides);
+    if (totalSlides <= 1) return; // Don't slide if only one slide
+    setCurrentSlide((prev) => {
+      const nextIndex = (prev + 1) % totalSlides;
+      console.log('Next slide:', nextIndex, 'Total slides:', totalSlides);
+      return nextIndex;
+    });
   };
 
   const prevSlide = () => {
-    setCurrentSlide((prev) => (prev - 1 + totalSlides) % totalSlides);
+    if (totalSlides <= 1) return; // Don't slide if only one slide
+    setCurrentSlide((prev) => {
+      const prevIndex = (prev - 1 + totalSlides) % totalSlides;
+      console.log('Prev slide:', prevIndex, 'Total slides:', totalSlides);
+      return prevIndex;
+    });
   };
 
   const getCurrentProducts = () => {
@@ -149,12 +159,18 @@ const Home: React.FC = () => {
           <section className="featured-section">
             <h2>{t('new_arrivals')}</h2>
             <div className="slider-container">
-              <button onClick={prevSlide} className="slider-btn prev">‹</button>
+              {totalSlides > 1 && (
+                <button onClick={prevSlide} className="slider-btn prev">‹</button>
+              )}
               
               <div className="product-slider">
                 <div 
                   className="slider-track"
-                  style={{ transform: `translateX(-${currentSlide * 100}%)` }}
+                  style={{ 
+                    transform: `translateX(-${currentSlide * 100}%)`,
+                    width: `${totalSlides * 100}%`,
+                    '--total-slides': totalSlides
+                  } as React.CSSProperties}
                 >
                   {Array.from({ length: totalSlides }).map((_, slideIndex) => (
                     <div key={slideIndex} className="slide">
@@ -183,18 +199,22 @@ const Home: React.FC = () => {
                 </div>
               </div>
               
-              <button onClick={nextSlide} className="slider-btn next">›</button>
+              {totalSlides > 1 && (
+                <button onClick={nextSlide} className="slider-btn next">›</button>
+              )}
             </div>
             
-            <div className="slider-dots">
-              {Array.from({ length: totalSlides }).map((_, index) => (
-                <button
-                  key={index}
-                  onClick={() => setCurrentSlide(index)}
-                  className={`dot ${currentSlide === index ? 'active' : ''}`}
-                />
-              ))}
-            </div>
+            {totalSlides > 1 && (
+              <div className="slider-dots">
+                {Array.from({ length: totalSlides }).map((_, index) => (
+                  <button
+                    key={index}
+                    onClick={() => setCurrentSlide(index)}
+                    className={`dot ${currentSlide === index ? 'active' : ''}`}
+                  />
+                ))}
+              </div>
+            )}
           </section>
         )}
          <section className="location-section">

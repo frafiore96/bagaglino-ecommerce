@@ -9,12 +9,12 @@ const WelcomePopup: React.FC<WelcomePopupProps> = ({ userName, onClose }) => {
   const [isVisible, setIsVisible] = useState(false);
 
   useEffect(() => {
-    // Mostra il popup dopo un piccolo delay
+    // Show the popup after a small delay
     const showTimer = setTimeout(() => {
       setIsVisible(true);
     }, 300);
 
-    // Nasconde automaticamente dopo 3 secondi
+    // Hide automatically after 3 seconds
     const hideTimer = setTimeout(() => {
       handleClose();
     }, 3000);
@@ -29,7 +29,7 @@ const WelcomePopup: React.FC<WelcomePopupProps> = ({ userName, onClose }) => {
     setIsVisible(false);
     setTimeout(() => {
       onClose();
-    }, 300); // Aspetta che l'animazione finisca
+    }, 300); // Wait for animation to finish
   };
 
   return (
@@ -42,8 +42,8 @@ const WelcomePopup: React.FC<WelcomePopupProps> = ({ userName, onClose }) => {
         onClick={(e) => e.stopPropagation()}
       >
         <div className="welcome-popup-content">
-          <h3>Ciao, {userName}!</h3>
-          <p>Benvenuto di nuovo su Bagaglino</p>
+          <h3>Hello, {userName}!</h3>
+          <p>Welcome back to Bagaglino</p>
           <button className="welcome-popup-close" onClick={handleClose}>
             ×
           </button>

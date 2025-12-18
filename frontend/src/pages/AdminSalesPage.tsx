@@ -97,7 +97,7 @@ const AdminSalesPage: React.FC = () => {
                 <div className="total">€{parseFloat(sale.total_amount).toFixed(2)}</div>
                 <div className="actions">
                   <button 
-                    onClick={() => alert(`Indirizzo fatturazione: ${sale.billing_address}\n\nIndirizzo spedizione: ${sale.shipping_address}`)}
+                    onClick={() => alert(`Billing address: ${sale.billing_address}\n\nShipping address: ${sale.shipping_address}`)}
                     className="btn-info"
                   >
                     {t('details')}

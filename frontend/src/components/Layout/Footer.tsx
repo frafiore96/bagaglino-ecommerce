@@ -16,14 +16,11 @@ const Footer: React.FC = () => {
               {t('footer_description')}
             </p>
             <div className="footer-social">
-              <a href="#" aria-label="Facebook" className="social-link">
+              <a href="https://www.facebook.com/bagaglinoabbigliamento/" aria-label="Facebook" className="social-link" target="_blank" rel="noopener noreferrer">
                 <i className="fab fa-facebook-f"></i>
               </a>
-              <a href="#" aria-label="Instagram" className="social-link">
+              <a href="https://www.instagram.com/bagaglino_abbigliamento/" aria-label="Instagram" className="social-link" target='_blank' rel="noopener noreferrer">
                 <i className="fab fa-instagram"></i>
-              </a>
-              <a href="#" aria-label="Twitter" className="social-link">
-                <i className="fab fa-twitter"></i>
               </a>
             </div>
           </div>
@@ -33,22 +30,10 @@ const Footer: React.FC = () => {
             <h4 className="footer-title">{t('quick_links')}</h4>
             <ul className="footer-links">
               <li><Link to="/">{t('home')}</Link></li>
-              <li><Link to="/category/uomo">{t('uomo')}</Link></li>
-              <li><Link to="/category/donna">{t('donna')}</Link></li>
-              <li><Link to="/category/unisex">{t('unisex')}</Link></li>
-              <li><Link to="/favorites">{t('favorites')}</Link></li>
-            </ul>
-          </div>
-
-          {/* Categorie */}
-          <div className="footer-section">
-            <h4 className="footer-title">{t('categories')}</h4>
-            <ul className="footer-links">
-              <li><Link to="/category/t-shirt">{t('t-shirt')}</Link></li>
-              <li><Link to="/category/maglioni">{t('maglioni')}</Link></li>
-              <li><Link to="/category/giacche">{t('giacche')}</Link></li>
-              <li><Link to="/category/pantaloni">{t('pantaloni')}</Link></li>
-              <li><Link to="/category/accessori">{t('accessori')}</Link></li>
+              <li><Link to="/category/uomo/all">{t('uomo')}</Link></li>
+              <li><Link to="/category/donna/all">{t('donna')}</Link></li>
+              <li><Link to="/category/unisex/all">{t('unisex')}</Link></li>
+              <li><Link to="/user/favorites">{t('favorites')}</Link></li>
             </ul>
           </div>
 
@@ -56,11 +41,7 @@ const Footer: React.FC = () => {
           <div className="footer-section">
             <h4 className="footer-title">{t('customer_support')}</h4>
             <ul className="footer-links">
-              <li><Link to="/contact">{t('contact_us')}</Link></li>
-              <li><Link to="/shipping">{t('shipping_info')}</Link></li>
-              <li><Link to="/returns">{t('return_policy')}</Link></li>
-              <li><Link to="/size-guide">{t('size_guide')}</Link></li>
-              <li><Link to="/faq">{t('faq')}</Link></li>
+              <li><a href="https://share.google/qtyR4Vq1ouatoNHqc" aria-label="Instagram" target='_blank' rel="noopener noreferrer">{t('contact_us')}</a></li>
             </ul>
           </div>
 
@@ -68,10 +49,8 @@ const Footer: React.FC = () => {
           <div className="footer-section">
             <h4 className="footer-title">{t('legal_info')}</h4>
             <ul className="footer-links">
-              <li><Link to="/privacy">{t('privacy_policy')}</Link></li>
-              <li><Link to="/terms">{t('terms_conditions')}</Link></li>
-              <li><Link to="/cookies">{t('cookie_policy')}</Link></li>
-              <li><Link to="/about">{t('about_us')}</Link></li>
+              <li><a href="https://www.instagram.com/bagaglino_abbigliamento/" aria-label="Instagram" target='_blank' rel="noopener noreferrer">{t('about_us')}
+              </a></li>
             </ul>
           </div>
         </div>

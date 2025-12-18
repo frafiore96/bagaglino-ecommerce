@@ -154,7 +154,7 @@ const AdminEditProductPage: React.FC = () => {
           }
         } catch (uploadError) {
           console.error('Upload error:', uploadError);
-          setError('Errore durante upload immagine');
+          setError('Error during image upload');
           setSaving(false);
           return;
         }
@@ -172,10 +172,10 @@ const AdminEditProductPage: React.FC = () => {
       };
 
       await adminAPI.updateProduct(parseInt(id!), productData);
-      alert('Prodotto aggiornato con successo!');
+      alert('Product updated successfully!');
       navigate('/admin/products');
     } catch (error: any) {
-      setError(error.response?.data?.message || 'Errore durante aggiornamento');
+      setError(error.response?.data?.message || 'Error during update');
     } finally {
       setSaving(false);
     }

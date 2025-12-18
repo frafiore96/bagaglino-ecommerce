@@ -109,17 +109,17 @@ const AdminCreateProductPage: React.FC = () => {
           }
         } catch (uploadError) {
           console.error('Upload error:', uploadError);
-          setError('Errore durante upload immagine');
+          setError('Error during image upload');
           setLoading(false);
           return;
         }
       }
   
       await adminAPI.createProduct(productData);
-      alert('Prodotto creato con successo!');
+      alert('Product created successfully!');
       navigate('/admin/products');
     } catch (error: any) {
-      setError(error.response?.data?.message || 'Errore durante la creazione');
+      setError(error.response?.data?.message || 'Error during creation');
     } finally {
       setLoading(false);
     }

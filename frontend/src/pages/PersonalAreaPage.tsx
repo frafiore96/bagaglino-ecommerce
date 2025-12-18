@@ -64,7 +64,7 @@ const PersonalAreaPage: React.FC = () => {
       alert('Profilo aggiornato con successo!');
     } catch (error: any) {
       console.error('Error updating profile:', error);
-      alert(error.response?.data?.message || 'Errore durante aggiornamento');
+      alert(error.response?.data?.message || 'Error during update');
     } finally {
       setSaving(false);
     }

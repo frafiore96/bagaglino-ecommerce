@@ -33,16 +33,16 @@ const FavoritesPage: React.FC = () => {
       alert('Rimosso dai preferiti!');
     } catch (error) {
       console.error('Error removing favorite:', error);
-      alert('Errore durante rimozione');
+      alert('Error during removal');
     }
   };
 
   const handleAddToCart = async (product: Product) => {
     try {
       await addToCart(product.id, 1);
-      alert('Prodotto aggiunto al carrello!');
+      alert('Product added to cart!');
     } catch (error) {
-      alert('Errore durante aggiunta al carrello');
+      alert('Error adding to cart');
     }
   };
 

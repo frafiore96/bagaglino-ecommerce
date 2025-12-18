@@ -88,9 +88,9 @@ const ProductPage: React.FC = () => {
     setAddingToCart(true);
     try {
       await addToCart(product.id, 1, selectedSize); // AGGIUNGI selectedSize
-      alert('Prodotto aggiunto al carrello!');
+      alert('Product added to cart!');
     } catch (error) {
-      alert('Errore durante aggiunta al carrello');
+      alert('Error adding to cart');
     } finally {
       setAddingToCart(false);
     }
@@ -105,9 +105,9 @@ const ProductPage: React.FC = () => {
     setAddingToFavorites(true);
     try {
       await userAPI.addFavorite(product.id);
-      alert('Prodotto aggiunto ai preferiti!');
+      alert('Product added to favorites!');
     } catch (error) {
-      alert('Errore durante aggiunta ai preferiti');
+      alert('Error adding to favorites');
     } finally {
       setAddingToFavorites(false);
     }
@@ -131,7 +131,7 @@ const ProductPage: React.FC = () => {
       }
       navigate('/user/checkout');
     } catch (error) {
-      alert('Errore durante aggiunta al carrello');
+      alert('Error adding to cart');
     }
   };
 

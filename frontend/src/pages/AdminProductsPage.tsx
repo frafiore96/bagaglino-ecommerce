@@ -33,9 +33,9 @@ const AdminProductsPage: React.FC = () => {
           headers: { 'Authorization': `Bearer ${localStorage.getItem('token')}` }
         });
         setProducts(products.filter(p => p.id !== id));
-        alert('Prodotto archiviato!');
+        alert('Product archived!');
       } catch (error) {
-        alert('Errore durante archiviazione');
+        alert('Error during archiving');
       }
     }
   };

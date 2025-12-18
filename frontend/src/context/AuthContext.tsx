@@ -59,14 +59,14 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
       localStorage.setItem('user', JSON.stringify(user));
       localStorage.setItem('token', token);
       
-      // Mostra il popup di benvenuto
+      // Show the welcome popup
       setShowWelcomePopup(true);
       
       return { success: true, user };
     } catch (error: any) {
       return { 
         success: false, 
-        message: error.response?.data?.message || 'Errore durante login' 
+        message: error.response?.data?.message || 'Login error' 
       };
     }
   };
@@ -85,7 +85,7 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
     } catch (error: any) {
       return { 
         success: false, 
-        message: error.response?.data?.message || 'Errore durante registrazione' 
+        message: error.response?.data?.message || 'Registration error' 
       };
     }
   };

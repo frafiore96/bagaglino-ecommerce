@@ -54,7 +54,7 @@ const CartPage: React.FC = () => {
       refreshCart();
     } catch (error) {
       console.error('Error updating cart:', error);
-      alert('Errore durante aggiornamento');
+      alert('Error during update');
     }
   };
 
@@ -66,7 +66,7 @@ const CartPage: React.FC = () => {
       alert('Prodotto rimosso dal carrello');
     } catch (error) {
       console.error('Error removing from cart:', error);
-      alert('Errore durante rimozione');
+      alert('Error during removal');
     }
   };
 
@@ -175,7 +175,7 @@ const CartPage: React.FC = () => {
                     onClick={() => navigate('/user/checkout')}
                     className="checkout-btn"
                   >
-                    {t('place_order')}
+                    {t('checkout')}
                   </button>
                 </div>
               </div>

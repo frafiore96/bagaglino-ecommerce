@@ -111,6 +111,9 @@ const translations = {
     'payment_method': 'Metodo di pagamento',
     'place_order': 'Conferma ordine',
     'order_summary': 'Riepilogo ordine',
+    'complete_order': 'Completa ordine',
+    'test_order_info': '💳 Questo è un ordine di test - nessun pagamento reale verrà elaborato',
+    'same_address': "L'indirizzo di spedizione è lo stesso dell'indirizzo di fatturazione",
     
     // User Profile
     'personal_area': 'Area personale',
@@ -151,13 +154,13 @@ const translations = {
     'details': 'Dettagli',
     
     // General
-    'welcome': 'Benvenuto',
-    'loading': 'Caricamento...',
-    'error': 'Errore',
-    'success': 'Successo',
-    'results_for': 'Risultati per',
-    'no_results': 'Nessun risultato trovato',
-    'show_more': 'Mostra altro',
+    'welcome': 'Welcome',
+    'loading': 'Loading...',
+    'error': 'Error',
+    'success': 'Success',
+    'results_for': 'Results for',
+    'no_results': 'No results found',
+    'show_more': 'Show more',
     'show_less': 'Mostra meno',
     'view_all': 'Visualizza tutto',
     'new_arrivals': 'Nuovi arrivi',
@@ -296,6 +299,9 @@ const translations = {
     'payment_method': 'Payment method',
     'place_order': 'Place order',
     'order_summary': 'Order summary',
+    'complete_order': 'Complete order',
+    'same_address': 'Shipping address is the same as billing address',
+    'test_order_info': '💳 This is a test order - no real payment will be processed',
     
     // User Profile
     'personal_area': 'Personal area',
