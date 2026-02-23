@@ -8,9 +8,11 @@ import { useAuth } from '../../context/AuthContext';
 import { useCart } from '../../context/CartContext';
 import { userAPI } from '../../services/api'; // AGGIUNGI QUESTO
 
+const isTouchDevice = () => window.matchMedia('(hover: none)').matches;
+
 const HeaderUser: React.FC = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [hoveredGender, setHoveredGender] = useState<string | null>(null);
+  const [activeGender, setActiveGender] = useState<string | null>(null);
   const [favoritesCount, setFavoritesCount] = useState(0); // AGGIUNGI QUESTO
   const { t } = useLanguage();
   const { logout } = useAuth();
@@ -96,70 +98,46 @@ const HeaderUser: React.FC = () => {
         </div>
       </div>
       
-      {/* resto del codice uguale */}
       <nav className="categories-nav">
-        <div 
-          className="gender-menu"
-          onMouseEnter={() => setHoveredGender('uomo')}
-          onMouseLeave={() => setHoveredGender(null)}
-        >
-          <Link to="/category/uomo/all" className="category-link">{t('uomo')}</Link>
-          {hoveredGender === 'uomo' && (
-            <div className="category-dropdown">
-              {categories.map((category) => (
-                <Link 
-                  key={category.name} 
-                  to={`/category/uomo/${category.name}`} 
-                  className="category-dropdown-item"
-                >
-                  {category.label}
-                </Link>
-              ))}
-            </div>
-          )}
-        </div>
-        
-        <div 
-          className="gender-menu"
-          onMouseEnter={() => setHoveredGender('donna')}
-          onMouseLeave={() => setHoveredGender(null)}
-        >
-          <Link to="/category/donna/all" className="category-link">{t('donna')}</Link>
-          {hoveredGender === 'donna' && (
-            <div className="category-dropdown">
-              {categories.map((category) => (
-                <Link 
-                  key={category.name} 
-                  to={`/category/donna/${category.name}`} 
-                  className="category-dropdown-item"
-                >
-                  {category.label}
-                </Link>
-              ))}
-            </div>
-          )}
-        </div>
-        
-        <div 
-          className="gender-menu"
-          onMouseEnter={() => setHoveredGender('unisex')}
-          onMouseLeave={() => setHoveredGender(null)}
-        >
-          <Link to="/category/unisex/all" className="category-link">{t('unisex')}</Link>
-          {hoveredGender === 'unisex' && (
-            <div className="category-dropdown">
-              {categories.map((category) => (
-                <Link 
-                  key={category.name} 
-                  to={`/category/unisex/${category.name}`} 
-                  className="category-dropdown-item"
-                >
-                  {category.label}
-                </Link>
-              ))}
-            </div>
-          )}
-        </div>
+        {(['uomo', 'donna', 'unisex'] as const).map((gender) => (
+          <div
+            key={gender}
+            className="gender-menu"
+            onMouseEnter={() => !isTouchDevice() && setActiveGender(gender)}
+            onMouseLeave={() => !isTouchDevice() && setActiveGender(null)}
+          >
+            <Link
+              to={`/category/${gender}/all`}
+              className="category-link"
+              onClick={(e) => {
+                if (isTouchDevice()) {
+                  if (activeGender !== gender) {
+                    e.preventDefault();
+                    setActiveGender(gender);
+                  } else {
+                    setActiveGender(null);
+                  }
+                }
+              }}
+            >
+              {t(gender)}
+            </Link>
+            {activeGender === gender && (
+              <div className="category-dropdown">
+                {categories.map((category) => (
+                  <Link
+                    key={category.name}
+                    to={`/category/${gender}/${category.name}`}
+                    className="category-dropdown-item"
+                    onClick={() => setActiveGender(null)}
+                  >
+                    {category.label}
+                  </Link>
+                ))}
+              </div>
+            )}
+          </div>
+        ))}
       </nav>
     </header>
   );

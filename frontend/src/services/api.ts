@@ -1,6 +1,7 @@
 import axios, { AxiosResponse } from 'axios';
+import config from '../config/config';
 
-const API_BASE_URL = 'http://localhost:8000/api';
+const API_BASE_URL = config.apiBaseUrl;
 
 // Types
 interface User {
@@ -68,7 +69,7 @@ const api = axios.create({
   },
 });
 
-// Interceptor per aggiungere token
+// Interceptor to add token
 api.interceptors.request.use((config) => {
   const token = localStorage.getItem('token');
   if (token) {
