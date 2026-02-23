@@ -1,10 +1,20 @@
 <?php
+require_once __DIR__ . '/config.php';
+
 class Database {
-    private $host = "localhost";
-    private $db_name = "bagaglino_db";
-    private $username = "root";
-    private $password = "";
+    private $host;
+    private $db_name;
+    private $username;
+    private $password;
     public $conn;
+
+    public function __construct() {
+        $config = Config::getDatabaseConfig();
+        $this->host = $config['host'];
+        $this->db_name = $config['dbname'];
+        $this->username = $config['username'];
+        $this->password = $config['password'];
+    }
 
     public function getConnection() {
         $this->conn = null;
@@ -18,4 +28,3 @@ class Database {
         return $this->conn;
     }
 }
-?>
