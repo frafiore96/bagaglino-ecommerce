@@ -9,6 +9,7 @@ class Config {
     public static function getDatabaseConfig() {
         return [
             'host' => self::getEnv('DB_HOST', 'localhost'),
+            'port' => self::getEnv('DB_PORT', '3306'),
             'dbname' => self::getEnv('DB_NAME', 'bagaglino_db'),
             'username' => self::getEnv('DB_USERNAME', 'root'),
             'password' => self::getEnv('DB_PASSWORD', ''),
