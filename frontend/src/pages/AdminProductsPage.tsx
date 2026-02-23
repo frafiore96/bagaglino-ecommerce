@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import Header from '../components/Layout/Header';
 import { adminAPI, Product } from '../services/api';
+import api from '../services/api';
 import { useLanguage } from '../context/LanguageContext';
 
 const AdminProductsPage: React.FC = () => {
@@ -28,10 +29,7 @@ const AdminProductsPage: React.FC = () => {
   const archiveProduct = async (id: number, name: string) => {
     if (window.confirm(`Archiviare il prodotto "${name}"? Non sarà più visibile sul sito.`)) {
       try {
-        await fetch(`http://localhost:8000/api/admin/archive-product.php?id=${id}`, {
-          method: 'PUT',
-          headers: { 'Authorization': `Bearer ${localStorage.getItem('token')}` }
-        });
+        await api.put(`/admin/archive-product.php?id=${id}`);
         setProducts(products.filter(p => p.id !== id));
         alert('Product archived!');
       } catch (error) {

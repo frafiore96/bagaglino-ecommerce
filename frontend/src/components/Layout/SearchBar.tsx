@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import { useLanguage } from '../../context/LanguageContext';
+import { productsAPI } from '../../services/api';
 
 interface Product {
   id: number;
@@ -39,9 +40,10 @@ const SearchBar: React.FC = () => {
     if (value.length > 2) {
       setIsLoading(true);
       try {
-        const response = await fetch(`http://localhost:8000/api/products/search.php?q=${encodeURIComponent(value)}`);
-        const data = await response.json();
-        setSuggestions(data.slice(0, 5));
+        const response = await productsAPI.search(value);
+        const data = response.data;
+        const results = Array.isArray(data) ? data : data.products || [];
+        setSuggestions(results.slice(0, 5));
         setShowSuggestions(true);
       } catch (error) {
         console.error('Search error:', error);

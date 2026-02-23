@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import Header from '../components/Layout/Header';
 import { adminAPI, productsAPI } from '../services/api';
+import config from '../config/config';
 import { useLanguage } from '../context/LanguageContext';
 
 const AdminEditProductPage: React.FC = () => {
@@ -140,7 +141,7 @@ const AdminEditProductPage: React.FC = () => {
         formDataUpload.append('image', imageFile);
         
         try {
-          const uploadResponse = await fetch('http://localhost:8000/api/admin/upload-image.php', {
+          const uploadResponse = await fetch(`${config.apiBaseUrl}/admin/upload-image.php`, {
             method: 'POST',
             headers: {
               'Authorization': `Bearer ${localStorage.getItem('token')}`
