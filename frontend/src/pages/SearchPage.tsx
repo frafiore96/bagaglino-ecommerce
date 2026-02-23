@@ -14,14 +14,15 @@ const SearchPage: React.FC = () => {
   useEffect(() => {
     const searchProducts = async () => {
       if (!query) return;
-      
+
       try {
         setLoading(true);
-        const response = await fetch(`http://localhost:8000/api/products/search.php?q=${encodeURIComponent(query)}`);
-        const data = await response.json();
-        setProducts(data);
+        const response = await productsAPI.search(query);
+        const data = response.data;
+        setProducts(Array.isArray(data) ? data : data.products || []);
       } catch (error) {
         console.error('Search error:', error);
+        setProducts([]);
       } finally {
         setLoading(false);
       }

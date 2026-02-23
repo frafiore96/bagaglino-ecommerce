@@ -345,7 +345,7 @@ Schema MySQL importabile da `backend/database.sql`.
 
 ```
 Email:    admin@bagaglino.com
-Password: admin123
+Password: password
 ```
 
 > Cambia la password admin immediatamente in produzione.
