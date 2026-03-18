@@ -83,20 +83,6 @@ const LoginPage: React.FC = () => {
           </div>
         </form>
 
-        {/* Test Credentials */}
-        <div className="test-credentials">
-          <h3>Credenziali di test:</h3>
-          <p><strong>Admin:</strong> admin@bagaglino.com / password</p>
-          <button 
-            onClick={() => {
-              setEmail('admin@bagaglino.com');
-              setPassword('password');
-            }}
-            className="test-btn"
-          >
-            Usa credenziali admin
-          </button>
-        </div>
       </div>
     </div>
   );
